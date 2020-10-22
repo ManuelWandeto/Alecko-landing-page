@@ -3768,65 +3768,66 @@ html.no-csstransitions .home-content__main {
 .footer__subscribe #mc-form {
   width: 100%;
 }
-
-.footer__subscribe #mc-form input[type="email"] {
+.footer__subscribe #mc-form input[type="tel"],
+.footer__subscribe #mc-form input[type="text"] {
   width: 100%;
   height: 6.8rem;
   font-size: 1.8rem;
   line-height: 3.2rem;
   padding: 1.8rem 140px 1.8rem 64px;
-  background: url(../images/icons/icon-mail.svg) 24px center no-repeat, rgba(255, 255, 255, 0.03);
-  background-size: 24px 16px, auto;
   color: white;
   margin-bottom: 2rem;
   border: none;
   border-radius: 4px;
 }
+.footer__subscribe #mc-form input[type="tel"] {
+  background: url(../images/icons/icon-phone.svg) 24px center no-repeat, rgba(255, 255, 255, 0.03);
+  background-size: 32px 24px, auto;
+}
+.footer__subscribe #mc-form input[type="text"] {
+  background: url(../images/icons/icon-person.svg) 24px center no-repeat, rgba(255, 255, 255, 0.03);
+  background-size: 32px 24px, auto;
+}
 
-.footer__subscribe #mc-form input[type="email"]:hover,
-.footer__subscribe #mc-form input[type="email"]:focus {
+.footer__subscribe #mc-form input[type="tel"]:hover,
+.footer__subscribe #mc-form input[type="tel"]:focus {
   box-shadow: none;
 }
 
-.footer__subscribe #mc-form input[type="email"]::-webkit-input-placeholder {
+.footer__subscribe #mc-form input[type="text"]:hover,
+.footer__subscribe #mc-form input[type="text"]:focus {
+  box-shadow: none;
+}
+.footer__subscribe #mc-form input[type="tel"]::-webkit-input-placeholder,
+.footer__subscribe #mc-form input[type="text"]::-webkit-input-placeholder {
 
   /* WebKit, Blink, Edge */
   color: rgba(255, 255, 255, 0.3);
 }
 
-.footer__subscribe #mc-form input[type="email"]:-moz-placeholder {
+.footer__subscribe #mc-form input[type="tel"]:-moz-placeholder,
+.footer__subscribe #mc-form input[type="text"]:-moz-placeholder {
 
   /* Mozilla Firefox 4 to 18 */
   color: rgba(255, 255, 255, 0.3);
   opacity: 1;
 }
 
-.footer__subscribe #mc-form input[type="email"]::-moz-placeholder {
-
-  /* Mozilla Firefox 19+ */
-  color: rgba(255, 255, 255, 0.3);
-  opacity: 1;
-}
-
-.footer__subscribe #mc-form input[type="email"]:-ms-input-placeholder {
-
-  /* Internet Explorer 10-11 */
-  color: rgba(255, 255, 255, 0.3);
-}
-
-.footer__subscribe #mc-form input[type="email"]::-ms-input-placeholder {
+.footer__subscribe #mc-form input[type="tel"]::-ms-input-placeholder,
+.footer__subscribe #mc-form input[type="text"]::-ms-input-placeholder {
 
   /* Microsoft Edge */
   color: rgba(255, 255, 255, 0.3);
 }
 
-.footer__subscribe #mc-form input[type="email"]::placeholder {
+.footer__subscribe #mc-form input[type="tel"]::placeholder,
+.footer__subscribe #mc-form input[type="text"]::placeholder {
 
   /* Most modern browsers support this now. */
   color: rgba(255, 255, 255, 0.3);
 }
-
-.footer__subscribe #mc-form input[type="email"].placeholder {
+.footer__subscribe #mc-form input[type="tel"].placeholder,
+.footer__subscribe #mc-form input[type="text"].placeholder {
   color: rgba(255, 255, 255, 0.3) !important;
 }
 
@@ -3840,7 +3841,7 @@ html.no-csstransitions .home-content__main {
   line-height: 6.4rem;
   border-radius: 0 4px 4px 0;
   position: absolute;
-  top: 0;
+  bottom: 4px;
   right: 0;
 }
 
@@ -4048,7 +4049,8 @@ html.no-csstransitions .home-content__main {
     border-top: none;
   }
 
-  .footer__subscribe #mc-form input[type="email"] {
+  .footer__subscribe #mc-form input[type="tel"],
+  .footer__subscribe #mc-form input[type="text"] {
     padding: 0 2.4rem;
     background: rgba(255, 255, 255, 0.03);
     text-align: center;

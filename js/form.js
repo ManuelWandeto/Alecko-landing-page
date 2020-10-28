@@ -2,12 +2,8 @@ const form = document.getElementById('mc-form');
 const phone_input = document.getElementById('mc-phone');
 const name_input = document.getElementById('mc-name');
 const submit = document.getElementById('submit');
-const message = document.querySelector('.subscribe-message');
-
-let formStatus = {
-    name: false,
-    phone: false
-}
+const nameError = document.getElementById('name-error');
+const phoneError = document.getElementById('phone-error');
 
 const iti = window.intlTelInput(phone_input, {
     utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js',
@@ -24,57 +20,78 @@ const iti = window.intlTelInput(phone_input, {
     customContainer: 'country_container',
 });
 
-name_input.addEventListener('keyup', () => {
-    if(name_input.value === '') {
-        name_input.classList.remove('valid');
-        name_input.classList.add('error');
-        formStatus.name = false;
-    } else {
-        name_input.classList.remove('error');
-        name_input.classList.add('valid');
-        formStatus.name = true;
-    }
-});
-
-phone_input.addEventListener('keyup', () => {
-    if(iti.isValidNumber() != true) {
-        phone_input.classList.remove('valid');
-        phone_input.classList.add('error');
-        formStatus.phone = false;
-    } else {
-        phone_input.classList.remove('error');
-        phone_input.classList.add('valid');
-        formStatus.phone = true;
-    }
-});
-
 form.addEventListener('submit', (evt) => {
     evt.preventDefault();
     validate()
-})
-let typewriter = new Typewriter(message);
+});
 
-function validate() {
-    if(formStatus.name && formStatus.phone) {
-        submitUser({
-            name: name_input.value,
-            phone: iti.getNumber()
-        });
+function validateName(name_input) {
+    if(name_input.value.trim() === '') {
+        name_input.classList.remove('valid');
+        name_input.classList.add('error');
+        nameError.textContent = 'Name cannot be empty!';
+        return false;
+    }
+
+    name_input.classList.remove('error');
+    name_input.classList.add('valid');
+    nameError.textContent = '';
+    return true;
+}
+
+function validatePhone(phone_input) {
+    const phoneErrorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+
+    if(iti.isValidNumber() != true) {
+        phone_input.classList.remove('valid');
+        phone_input.classList.add('error');
+        const errorCode = iti.getValidationError();
+        phoneError.textContent = phoneErrorMap[errorCode];
+        return false;
     } else {
-        typewriter.typeString('Invalid values, please revise!')
-            .pauseFor(3000)
-            .deleteAll()
-            .start();
+        phone_input.classList.remove('error');
+        phone_input.classList.add('valid');
+        phoneError.textContent = '';
+        return true;
     }
 }
 
-async function submitUser(data) {
+function validate() {
+    const formStatus = {
+        name: validateName(name_input),
+        phone: validatePhone(phone_input)
+    }
+
+    if(formStatus.name && formStatus.phone) {
+        SignUp(name_input.value, iti.getNumber());
+    }
+}
+
+const mock = (success, timeout) => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if(success) {
+          resolve();
+        } else {
+          reject({message: 'Error'});
+        }
+      }, timeout);
+    });
+}
+  
+async function SignUp(name, phone) {
+    const loader = `<span class="lds-dual-ring"></span>`;
+    submit.classList.remove('submit-error');
+    submit.classList.add('spin');
+    submit.disabled = true;
+
+    const data = {
+        name: name,
+        phone: phone
+    }
+
     try {
-        typewriter.deleteAll()
-            .typeString('Signing up...')
-            .start();
-            
-        const response = await fetch('https://us-central1-alecko-8bca5.cloudfunctions.net/app/waitingList', {
+        const response = await fetch('http://localhost:5000/alecko-8bca5/us-central1/app/waitingList', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -82,18 +99,17 @@ async function submitUser(data) {
             body: JSON.stringify(data)
         })
         if(response.status != 200) {
-            throw new Error();
+            throw new Error(`Internal error, server responded with: ${response.status}`);
         }
-        typewriter.deleteAll().typeString('Signed up! thank you :)').start();
         
+        submit.textContent = 'Success!';
     } catch (error) {
-        typewriter.deleteAll()
-        .typeString('Server error while signing up, please contact me: 0717171647')
-        .start();
+        submit.classList.add('submit-error');
+        submit.innerHTML = `Try Again! ${loader}`
     } finally {
-        typewriter
-        .pauseFor(5000)
-        .deleteAll()
-        .stop()
+        submit.classList.remove('spin');
+        submit.disabled = false;
     }
+    
 }
+

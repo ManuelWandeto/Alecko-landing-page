@@ -2490,7 +2490,7 @@ html.no-csstransitions .home-content__main {
   }
 
   .home-content__right img {
-    margin-top: 0;
+    margin-top: -1.3rem;
   }
 
 }
@@ -3335,6 +3335,44 @@ html.no-csstransitions .home-content__main {
 /* -------------------------------------------------------------------
  * ## subscribe form
  * ------------------------------------------------------------------- */
+
+ /* Loading indicator */
+
+.lds-dual-ring {
+  opacity: 0;
+  transition: opacity 750ms ease-in;
+}
+ .spin .lds-dual-ring {
+  opacity: 1;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  left: 10px;
+  top: 10px;
+  bottom: 8px;
+  position: absolute;
+}
+.spin .lds-dual-ring::before {
+  content: " ";
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* End loading indicator*/
+
 .footer__subscribe .subscribe-form {
   margin: 4rem 0 0 0;
   padding: 0;
@@ -3407,7 +3445,7 @@ html.no-csstransitions .home-content__main {
   color: rgba(255, 255, 255, 0.3) !important;
 }
 
-.footer__subscribe #mc-form input[type=submit] {
+.footer__subscribe #mc-form button[type=submit] {
   color: #ffffff;
   background: linear-gradient(162.51deg, #42275A -19.75%, #734B6D 100%);
   border: none;
@@ -3418,6 +3456,16 @@ html.no-csstransitions .home-content__main {
   border-radius: 0 4px 4px 0;
   position: absolute;
   right: 0;
+  transition: all 750ms ease-in;
+}
+
+.footer__subscribe #mc-form button[type=submit]:disabled {
+  background: linear-gradient(162.51deg, #58515E -19.75%, #786074 100%);
+  cursor: default;
+}
+
+.footer__subscribe #mc-form button[type=submit].submit-error {
+  background: #FF4949;
 }
 
 .footer__subscribe #mc-form label {
@@ -3599,6 +3647,7 @@ html.no-csstransitions .home-content__main {
 }
 
 @media only screen and (max-width:800px) {
+
   .s-footer {
     padding-top: 14.8rem;
   }
@@ -3609,7 +3658,20 @@ html.no-csstransitions .home-content__main {
 
 }
 
+@media only screen and (min-width: 601px) {
+  .spin {
+    padding-left: 64px !important;
+  }
+}
+
 @media only screen and (max-width:600px) {
+  .spin .lds-dual-ring {
+    right: 30%;
+    bottom: 13.5%;
+    top: unset;
+    left: unset;
+  }
+
   .s-footer {
     padding-top: 12rem;
     padding-bottom: 4rem;
@@ -3631,7 +3693,7 @@ html.no-csstransitions .home-content__main {
     text-align: center;
   }
 
-  .footer__subscribe #mc-form input[type=submit] {
+  .footer__subscribe #mc-form button[type=submit] {
     position: static;
     margin-right: 0;
     width: 100%;

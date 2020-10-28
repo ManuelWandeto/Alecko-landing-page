@@ -42,6 +42,10 @@
         #mc-form input[type].valid {
             border-color: green;
         }
+        .error-message {
+            color: #FF4949;
+            font-size: 14px;
+        }
     </style>
     <!-- favicons
     ================================================== -->
@@ -127,9 +131,8 @@
             </div> <!-- end home-content__main -->
 
             <ul class="home-content__social">
-                <li><a href="#0">Facebook</a></li>
-                <li><a href="#0">twitter</a></li>
-                <li><a href="#0">Instagram</a></li>
+                <li><a href="https://twitter.com/ManuelWandeto" target="_blank">twitter</a></li>
+                <li><a href="https://www.instagram.com/immanuel_wandeto/" target="_blank">Instagram</a></li>
             </ul>
 
         </div> <!-- end home-content -->
@@ -216,12 +219,13 @@
            <div class="col-full video-bg" data-aos="fade-up">
 
                 <div class="shadow-overlay"></div>
-
+                <!-- TODO: Make video play button pulse to attract attention -->
                 <a class="btn-video" href="https://player.vimeo.com/video/14592941?color=00a650&title=0&byline=0&portrait=0" data-lity>
                     <span class="video-icon"></span>
                 </a>
 
-                <div class="stats">
+                <!-- <div class="stats">
+                    TODO: Display this stat when sign-ups>1000
                     <div class="item-stats">
                         <span class="item-stats__num">
                             24K
@@ -229,8 +233,8 @@
                         <span class="item-stats__title">
                             Sign Ups
                         </span>
-                    </div> <!-- end item-stats -->
-                </div>
+                    </div> 
+                </div> -->
            </div> <!-- end video-bg -->
         </div>
 
@@ -404,17 +408,20 @@
 
             <div class="col-full footer__subscribe end">
                 <div class="subscribe-form">
-                    
+                    <span id="name-error" class="error-message"></span>
                     <form id="mc-form" class="group" novalidate="true">
                         <input type="text" value="" name="Name" id="mc-name" class="validation" placeholder="Your Name" required="">
 
+                        <span id="phone-error" class="error-message"></span>
                         <input type="tel" value="" name="phone" class="validation" id="mc-phone" required="">
                         
-                        <input type="submit" name="subscribe" id = "submit" value="Sign Up">
+                        <button type="submit" name="subscribe" id = "submit">
+                            Sign Up
+                            <span class="lds-dual-ring"></span>
+                        </button>
 
                     </form>
 
-                    <span for="mc-email" class="subscribe-message"></span>
                 </div>
             </div>
 
@@ -434,8 +441,8 @@
                 </p>
 
                 <ul class="footer__social">
-                    <li><a href="https://twitter.com/ManuelWandeto"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-                    <li><a href="https://www.instagram.com/immanuel_wandeto/"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+                    <li><a href="https://twitter.com/ManuelWandeto" target="_blank"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                    <li><a href="https://www.instagram.com/immanuel_wandeto/" target="_blank"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
                 </ul>
             </div>
 
@@ -483,7 +490,6 @@
     <!-- Java Script
     ================================================== -->
     <script src="./js/intlTelInput.min.js"></script>
-    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
     <script src="./js/form.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

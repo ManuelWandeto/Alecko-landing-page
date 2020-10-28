@@ -67,17 +67,17 @@ function validate() {
     }
 }
 
-const mock = (success, timeout) => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if(success) {
-          resolve();
-        } else {
-          reject({message: 'Error'});
-        }
-      }, timeout);
-    });
-}
+// const mock = (success, timeout) => {
+//     return new Promise((resolve, reject) => {
+//       setTimeout(() => {
+//         if(success) {
+//           resolve();
+//         } else {
+//           reject({message: 'Error'});
+//         }
+//       }, timeout);
+//     });
+// }
   
 async function SignUp(name, phone) {
     const loader = `<span class="lds-dual-ring"></span>`;
@@ -91,7 +91,7 @@ async function SignUp(name, phone) {
     }
 
     try {
-        const response = await fetch('http://localhost:5000/alecko-8bca5/us-central1/app/waitingList', {
+        const response = await fetch('https://us-central1-alecko-8bca5.cloudfunctions.net/app/waitingList', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -101,8 +101,9 @@ async function SignUp(name, phone) {
         if(response.status != 200) {
             throw new Error(`Internal error, server responded with: ${response.status}`);
         }
-        
+
         submit.textContent = 'Success!';
+        form.reset();
     } catch (error) {
         submit.classList.add('submit-error');
         submit.innerHTML = `Try Again! ${loader}`

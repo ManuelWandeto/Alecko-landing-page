@@ -2,6 +2,9 @@
  * Kairos - Main JS
  *
  * ------------------------------------------------------------------- */
+const AOS = require('aos');
+// require('../../node_modules/waypoints/lib/jquery.waypoints.min');
+// require('./slick-slider.min');
 
 (function($) {
 
@@ -156,25 +159,6 @@
                 },
                 {
                     breakpoint: 701,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1
-                    }
-                }
-            ]
-        });
-
-        $('.testimonials__slider').slick({
-            arrows: false,
-            dots: true,
-            infinite: true,
-            slidesToShow: 2,
-            slidesToScroll: 1,
-            pauseOnFocus: false,
-            autoplaySpeed: 1500,
-            responsive: [
-                {
-                    breakpoint: 1001,
                     settings: {
                         slidesToShow: 1,
                         slidesToScroll: 1

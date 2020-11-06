@@ -1,3 +1,5 @@
+const intlTelInput = require('intl-tel-input');
+
 const form = document.getElementById('mc-form');
 const phone_input = document.getElementById('mc-phone');
 const name_input = document.getElementById('mc-name');
@@ -5,7 +7,7 @@ const submit = document.getElementById('submit');
 const nameError = document.getElementById('name-error');
 const phoneError = document.getElementById('phone-error');
 
-const iti = window.intlTelInput(phone_input, {
+const iti = intlTelInput(phone_input, {
     utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js',
     autoPlaceholder: "aggressive",
     separateDialCode: true,
@@ -113,4 +115,3 @@ async function SignUp(name, phone) {
     }
     
 }
-

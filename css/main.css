@@ -1680,6 +1680,7 @@ input::-moz-focus-inner {
  * # header styles
  *
  * ------------------------------------------------------------------- */
+
 .s-header {
   z-index: 600;
   width: 100%;
@@ -3502,6 +3503,31 @@ html.no-csstransitions .home-content__main {
   padding-right: 6px;
 }
 
+/* Overrides */
+.iti__flag {background-image: url("../images/flags.png");}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+.iti__flag {background-image: url("../images/flags@2x.png");}
+}
+.iti__country-name {
+    color: #282829;
+}
+.footer__subscribe #mc-form input[type].validation {
+    border-left: 2px solid;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+.footer__subscribe #mc-form input[type].error {
+    border-color: #FF4949;
+}
+.footer__subscribe #mc-form input[type].valid {
+    border-color: green;
+}
+.error-message {
+    color: #FF4949;
+    font-size: 14px;
+}
+
+/* end overrides */
 
 /* ------------------------------------------------------------------- 
  * ## footer social
